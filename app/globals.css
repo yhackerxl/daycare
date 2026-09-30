@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: rgba(47, 125, 91, 0.18);
+}
+
+body {
+  @apply bg-white text-ink antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a, button {
+  touch-action: manipulation;
+}
+
+/* Accessible focus: visible only for keyboard */
+:where(a, button, input, select, textarea, [tabindex]):focus {
+  outline: none;
+}
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid #2F7D5B;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Headings: prevent widows, handle long words */
+h1, h2, h3 {
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+p {
+  overflow-wrap: break-word;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  background: #2F7D5B;
+  color: #fff;
+  padding: 0.625rem 1rem;
+  border-radius: 0.75rem;
+  transition: top 0.18s ease;
+}
+.skip-link:focus-visible {
+  top: 1rem;
+}
+
+/* Decorative shapes should be hidden from AT via aria-hidden in markup; keep them non-interactive */
+.decorative {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Subtle card hover: transform + shadow only, explicit properties */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+}
+
+/* Numbers */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
